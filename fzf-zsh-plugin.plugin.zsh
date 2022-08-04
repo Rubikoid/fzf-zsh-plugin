@@ -13,13 +13,14 @@
 # limitations under the License.
 
 # Add our plugin's bin directory to the user's path
-local FZF_PLUGIN_BIN="$(dirname $0)/bin"
-path+=(${FZF_PLUGIN_BIN})
-unset FZF_PLUGIN_BIN
 
-local FZF_COMPLETIONS_D="$(dirname $0)/completions"
-export fpath=($FZF_COMPLETIONS_D "${fpath[@]}" )
-unset FZF_COMPLETIONS_D
+# local FZF_PLUGIN_BIN="$(dirname $0)/bin"
+# path+=(${FZF_PLUGIN_BIN})
+# unset FZF_PLUGIN_BIN
+
+# local FZF_COMPLETIONS_D="$(dirname $0)/completions"
+# export fpath=($FZF_COMPLETIONS_D "${fpath[@]}" )
+# unset FZF_COMPLETIONS_D
 
 function _fzf_has() {
   which "$@" > /dev/null 2>&1
@@ -35,32 +36,32 @@ function _fzf_debugOut() {
 # file searching.
 
 # Determine where fzf is installed
-local fzf_conf
-if [[ -z "$FZF_PATH" ]]; then
-  FZF_PATH=~/.fzf
-  fzf_conf=~/.fzf.zsh
-else
-  fzf_conf="$FZF_PATH/fzf.zsh"
-fi
-unset xdg_path
+#local fzf_conf
+#if [[ -z "$FZF_PATH" ]]; then
+#  FZF_PATH=~/.fzf
+#  fzf_conf=~/.fzf.zsh
+#else
+#  fzf_conf="$FZF_PATH/fzf.zsh"
+#fi
 
 # Install fzf into ~ if it hasn't already been installed.
-if [[ ! -d $FZF_PATH ]]; then
-  git clone --depth 1 https://github.com/junegunn/fzf.git $FZF_PATH
-  $FZF_PATH/install --bin
-fi
+# if [[ ! -d $FZF_PATH ]]; then
+#   git clone --depth 1 https://github.com/junegunn/fzf.git $FZF_PATH
+#   $FZF_PATH/install --bin
+# fi
 
 # Install some default settings if user doesn't already have fzf
 # settings configured.
-if [[ ! -f $fzf_conf ]]; then
-  echo "Can't find a fzf configuration file at $fzf_conf, creating a default one"
-  cp "$(dirname $0)/fzf-settings.zsh" $fzf_conf
-fi
+# if [[ ! -f $fzf_conf ]]; then
+#   echo "Can't find a fzf configuration file at $fzf_conf, creating a default one"
+#   cp "$(dirname $0)/fzf-settings.zsh" $fzf_conf
+# fi
 
 # Source this before we start examining things so we can override the
 # defaults cleanly.
-[[ -f $fzf_conf ]] && source $fzf_conf
-unset fzf_conf
+# [[ -f $fzf_conf ]] && source $fzf_conf
+
+source "$(dirname $0)/fzf-settings.zsh"
 
 # Reasonable defaults. Exclude .git directory and the node_modules cesspit.
 # Don't step on user's FZF_DEFAULT_COMMAND
