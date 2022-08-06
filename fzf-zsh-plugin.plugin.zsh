@@ -70,8 +70,8 @@ function _fzf_debugOut() {
 # Reasonable defaults. Exclude .git directory and the node_modules cesspit.
 # Don't step on user's FZF_DEFAULT_COMMAND
 if [[ -z "$FZF_DEFAULT_COMMAND" ]]; then
-  export FZF_DEFAULT_COMMAND='find . -type f ( -path .git -o -path node_modules ) -prune'
-  export FZF_ALT_C_COMMAND='find . -type d ( -path .git -o -path node_modules ) -prune'
+  export FZF_DEFAULT_COMMAND='find . -type f ! \( -path .git -o -path node_modules \) -prune'
+  export FZF_ALT_C_COMMAND='find . -type d ! \( -path .git -o -path node_modules \) -prune'
 
   if _fzf_has rg; then
     # rg is faster than find, so use it instead.
