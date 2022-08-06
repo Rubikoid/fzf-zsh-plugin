@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ "${FZF_TMUX}" == 1 ]]; then
-    echo 1
-    fzf-tmux $@
+    fzf-tmux "$@"
 else
-    fzf $@
+    fzf "$@"
 fi
