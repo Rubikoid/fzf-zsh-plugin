@@ -4,10 +4,7 @@
 #
 # Source - https://betterprogramming.pub/boost-your-command-line-productivity-with-fuzzy-finder-985aa162ba5d
 
-set -o pipefail
-if [[ -n "$DEBUG" ]]; then
-  set -x
-fi
+source "$(dirname $0)/_base.sh"
 
 fif() {
   if [ ! "$#" -gt 0 ]; then

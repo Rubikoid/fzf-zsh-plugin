@@ -4,28 +4,9 @@
 #
 # From fzf-uni wiki: https://github.com/junegunn/fzf/wiki/examples
 
-set -o pipefail
-if [[ -n "$DEBUG" ]]; then
-  set -x
-fi
+source "$(dirname $0)/_base.sh"
 
-function debug() {
-  if [[ -n "$DEBUG" ]]; then
-    echo "$@"
-  fi
-}
-
-function fail() {
-  printf '%s\n' "$1" >&2  ## Send message to stderr. Exclude >&2 if you don't want it that way.
-  exit "${2-1}"  ## Return a code specified by $2 or 1 by default.
-}
-
-function has() {
-  # Check if a command is in $PATH
-  which "$@" > /dev/null 2>&1
-}
-
-function da() {
+function dattach() {
   local cid
   cid=$(docker ps -a | sed 1d | fzf-uni -1 -q "$1" | awk '{print $1}')
 

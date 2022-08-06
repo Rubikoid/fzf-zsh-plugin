@@ -26,8 +26,8 @@ unset FZF_PLUGIN_BIN
 
 function _fzf_has() {
   # which "$@" > /dev/null 2>&1
-  # command -v "$@"
-  false;
+  # use whence instead of which due to speed
+  whence "$@" # > /dev/null
 }
 
 function _fzf_debugOut() {
@@ -141,7 +141,7 @@ if _fzf_has tree; then
   function fzf-change-directory() {
     local directory=$(
       fd --type d | \
-      fzf-tmux --query="$1" --no-multi --select-1 --exit-0 \
+      fzf-uni --query="$1" --no-multi --select-1 --exit-0 \
         --preview 'tree -C {} | head -100'
       )
     if [[ -n "$directory" ]]; then
@@ -164,7 +164,7 @@ if _fzf_has z; then
   # like normal z when used with arguments but displays an fzf prompt when used without.
   function z() {
     [ $# -gt 0 ] && $_fzf_z "$*" && return
-    cd "$($_fzf_z -l 2>&1 | fzf-tmux --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
+    cd "$($_fzf_z -l 2>&1 | fzf-uni --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
   }
 fi
 
@@ -175,7 +175,7 @@ export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 function cdf() {
   local file
   local dir
-  file=$(fzf-tmux +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
+  file=$(fzf-uni +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
 }
 
 if _fzf_has pbcopy; then
@@ -183,7 +183,7 @@ if _fzf_has pbcopy; then
     function falias {
         # Search alias by key or values
         local out
-        out=$(alias | fzf)
+        out=$(alias | fzf-uni)
         echo -n "$(echo -n "${out}" | cut -d= -f2 | ghead -c -1 | pbcopy)"
     }
   fi
