@@ -3,19 +3,7 @@
 # Original Author: Mark Nielsen
 # Original source: https://polothy.github.io/post/2019-08-19-fzf-uni-git-checkout/
 
-set -o pipefail
-if [[ -n "$DEBUG" ]]; then
-  set -x
-fi
-
-fail() {
-  printf '%s\n' "$1" >&2  ## Send message to stderr. Exclude >&2 if you don't want it that way.
-  exit "${2-1}"  ## Return a code specified by $2 or 1 by default.
-}
-
-has() {
-  which "$@" > /dev/null 2>&1
-}
+source "$(dirname $0)/_base.sh"
 
 in_git_repo() {
   git rev-parse HEAD > /dev/null 2>&1

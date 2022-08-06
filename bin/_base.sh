@@ -17,4 +17,5 @@ function fail() {
 function has() {
   # Check if a command is in $PATH
   which "$@" > /dev/null 2>&1
+  # whence "$@" > /dev/null
 }

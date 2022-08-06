@@ -8,7 +8,7 @@ source "$(dirname $0)/_base.sh"
 if has yay; then
   yay -Slq | \
   sort | \
-  fzf --multi --cycle --reverse --preview 'yay -Si {1}' --preview-window='right:70%:nohidden' | \
+  fzf --query="$1" --multi --cycle --reverse --preview 'yay -Si {1}' --preview-window='right:70%:nohidden' | \
   xargs -ro yay -S
 else
   fail "Cannot find yay in $PATH."

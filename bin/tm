@@ -6,20 +6,7 @@
 #
 # Source: https://github.com/junegunn/fzf-uni/wiki/examples
 
-set -o pipefail
-if [[ -n "$DEBUG" ]]; then
-  set -x
-fi
-
-function fail() {
-  printf '%s\n' "$1" >&2  ## Send message to stderr. Exclude >&2 if you don't want it that way.
-  exit "${2-1}"  ## Return a code specified by $2 or 1 by default.
-}
-
-function has() {
-  # Check if a command is in $PATH
-  which "$@" > /dev/null 2>&1
-}
+source "$(dirname $0)/_base.sh"
 
 tm() {
   [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"

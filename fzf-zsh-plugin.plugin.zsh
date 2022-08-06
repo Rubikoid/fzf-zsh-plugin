@@ -27,7 +27,7 @@ unset FZF_PLUGIN_BIN
 function _fzf_has() {
   # which "$@" > /dev/null 2>&1
   # use whence instead of which due to speed
-  whence "$@" # > /dev/null
+  whence "$@" > /dev/null
 }
 
 function _fzf_debugOut() {
