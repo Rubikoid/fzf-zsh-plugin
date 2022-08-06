@@ -2,7 +2,7 @@
 #
 # Select a docker container to remove
 #
-# From fzf wiki: https://github.com/junegunn/fzf/wiki/examples
+# From fzf-uni wiki: https://github.com/junegunn/fzf/wiki/examples
 
 set -o pipefail
 if [[ -n "$DEBUG" ]]; then
@@ -26,7 +26,7 @@ function has() {
 }
 
 function drm() {
-  docker ps -a | sed 1d | fzf -q "$1" --no-sort -m --tac | awk '{ print $1 }' | xargs -r docker rm
+  docker ps -a | sed 1d | fzf-uni -q "$1" --no-sort -m --tac | awk '{ print $1 }' | xargs -r docker rm
 }
 
 if has docker; then

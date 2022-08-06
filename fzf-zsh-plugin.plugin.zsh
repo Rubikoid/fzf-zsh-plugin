@@ -14,16 +14,20 @@
 
 # Add our plugin's bin directory to the user's path
 
-# local FZF_PLUGIN_BIN="$(dirname $0)/bin"
-# path+=(${FZF_PLUGIN_BIN})
-# unset FZF_PLUGIN_BIN
+local FZF_PLUGIN_BIN="$(dirname $0)/bin"
+path+=(${FZF_PLUGIN_BIN})
+unset FZF_PLUGIN_BIN
 
 # local FZF_COMPLETIONS_D="$(dirname $0)/completions"
 # export fpath=($FZF_COMPLETIONS_D "${fpath[@]}" )
 # unset FZF_COMPLETIONS_D
 
+# zmodload zsh/zprof
+
 function _fzf_has() {
-  which "$@" > /dev/null 2>&1
+  # which "$@" > /dev/null 2>&1
+  # command -v "$@"
+  false;
 }
 
 function _fzf_debugOut() {
@@ -61,7 +65,7 @@ function _fzf_debugOut() {
 # defaults cleanly.
 # [[ -f $fzf_conf ]] && source $fzf_conf
 
-source "$(dirname $0)/fzf-settings.zsh"
+# source "$(dirname $0)/fzf-settings.zsh"
 
 # Reasonable defaults. Exclude .git directory and the node_modules cesspit.
 # Don't step on user's FZF_DEFAULT_COMMAND
@@ -137,7 +141,7 @@ if _fzf_has tree; then
   function fzf-change-directory() {
     local directory=$(
       fd --type d | \
-      fzf --query="$1" --no-multi --select-1 --exit-0 \
+      fzf-tmux --query="$1" --no-multi --select-1 --exit-0 \
         --preview 'tree -C {} | head -100'
       )
     if [[ -n "$directory" ]]; then
@@ -160,7 +164,7 @@ if _fzf_has z; then
   # like normal z when used with arguments but displays an fzf prompt when used without.
   function z() {
     [ $# -gt 0 ] && $_fzf_z "$*" && return
-    cd "$($_fzf_z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
+    cd "$($_fzf_z -l 2>&1 | fzf-tmux --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
   }
 fi
 
@@ -171,7 +175,7 @@ export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 function cdf() {
   local file
   local dir
-  file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
+  file=$(fzf-tmux +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
 }
 
 if _fzf_has pbcopy; then

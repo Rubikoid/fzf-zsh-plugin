@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Select a PR with fzf
+# Select a PR with fzf-uni
 #
 # Copyright 2021, Joe Block <jpb@unixorn.net>
 
@@ -26,7 +26,7 @@ function has() {
 }
 
 if has gh; then
-  gh api --paginate 'repos/:owner/:repo/pulls?state=open' | jq -r '.[] | [.number, .user.login, .title] | @tsv' | fzf
+  gh api --paginate 'repos/:owner/:repo/pulls?state=open' | jq -r '.[] | [.number, .user.login, .title] | @tsv' | fzf-uni
 else
   fail "Cannot find 'gh' in your PATH"
 fi

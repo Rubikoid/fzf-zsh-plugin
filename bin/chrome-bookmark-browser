@@ -33,7 +33,7 @@ b() {
 
     jq -r "$jq_script" < "$bookmarks_path" \
         | sed -E $'s/(.*)\t(.*)/\\1\t\x1b[36m\\2\x1b[m/g' \
-        | fzf --ansi \
+        | fzf-uni --ansi \
         | cut -d$'\t' -f2 \
         | xargs open
 }
@@ -44,8 +44,8 @@ if [[ ! -r "$bookmarks_path" ]]; then
 fi
 
 myname=$(basename "$0")
-if ! has fzf; then
-  fail "$myname requires fzf and can't find it in $PATH"
+if ! has fzf-uni; then
+  fail "$myname requires fzf-uni and can't find it in $PATH"
 fi
 if ! has jq; then
   fail "$myname requires jq and can't find it in $PATH"

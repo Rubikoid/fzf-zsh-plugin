@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 #
-# lessfilter-fzf is a `less` pre-processor intended (but not strictly required) to work together with `lesspipe.sh`.
+# lessfilter-fzf-uni is a `less` pre-processor intended (but not strictly required) to work together with `lesspipe.sh`.
 #
 # Make the most of it by installing lesspipe.sh, e.g. `brew install lesspipe`, see https://github.com/wofr06/lesspipe
 # When `lesspipe.sh` is available, it will be used to view a wide range of file formats (directories, images, PDFs,
@@ -9,10 +9,10 @@
 # In case that you are not using your own custom `less` pre-processor, it can also be quite handy to use this one. You
 # can export LESSOPEN in your init scripts (.bashrc/.zshrc or similar):
 #
-#   export LESSOPEN='| lessfilter-fzf %s'
+#   export LESSOPEN='| lessfilter-fzf-uni %s'
 #
 # Ultimately, lesspipe.sh will honor your own `lessfilter` if found in your PATH, leading to the following execution:
-#   lessfilter-fzf > lesspipe.sh > lessfilter
+#   lessfilter-fzf-uni > lesspipe.sh > lessfilter
 #
 # Required tools:
 #   - exa
@@ -20,7 +20,7 @@
 #   - chafa, exiftool
 #   - lesspipe.sh (recommended)
 #
-# Credits: This script (beyond any modification) was taken from https://github.com/Aloxaf/fzf-tab/wiki/Preview
+# Credits: This script (beyond any modification) was taken from https://github.com/Aloxaf/fzf-uni-tab/wiki/Preview
 #
 
 EXIT_UNHANDLED=10

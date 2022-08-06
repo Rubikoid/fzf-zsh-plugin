@@ -12,5 +12,5 @@
 # ------------
 # source "${FZF_PATH}/shell/key-bindings.zsh"
 
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+# source /usr/share/fzf/key-bindings.zsh
+# source /usr/share/fzf/completion.zsh

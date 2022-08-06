@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [[ "${FZF_TMUX}" == 1 ]]; then
+    echo 1
+    fzf-tmux $@
+else
+    fzf $@
+fi

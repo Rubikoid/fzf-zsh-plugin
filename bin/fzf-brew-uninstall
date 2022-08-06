@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Original source: https://bluz71.github.io/2018/11/26/fuzzy-finding-in-bash-with-fzf.html
+# Original source: https://bluz71.github.io/2018/11/26/fuzzy-finding-in-bash-with-fzf-uni.html
 
 set -o pipefail
 if [[ -n "$DEBUG" ]]; then
@@ -21,8 +21,8 @@ if ! has brew; then
 fi
 
 # Delete (one or multiple) selected application(s)
-fzf-brew-uninstall() {
-  uninst=$(brew leaves | fzf -m --preview 'brew info {}')
+fzf-uni-brew-uninstall() {
+  uninst=$(brew leaves | fzf-uni -m --preview 'brew info {}')
 
   if [[ $uninst ]]; then
     for prog in $uninst
@@ -33,4 +33,4 @@ fzf-brew-uninstall() {
 }
 
 # shellcheck disable=SC2068
-fzf-brew-uninstall $@
+fzf-uni-brew-uninstall $@

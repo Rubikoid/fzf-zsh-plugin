@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 #
-# tmux-kill-session - kills a tmux session that you select via fzf.
+# tmux-kill-session - kills a tmux session that you select via fzf-uni.
 #
-# Source: https://github.com/junegunn/fzf/wiki/examples
+# Source: https://github.com/junegunn/fzf-uni/wiki/examples
 setopt re_match_pcre
 
 set -o pipefail
@@ -22,7 +22,7 @@ function has() {
 
 tmuxkillf () {
     local sessions
-    sessions="$(tmux ls|fzf --exit-0 --multi)"  || return $?
+    sessions="$(tmux ls|fzf-uni --exit-0 --multi)"  || return $?
     local i
     for i in "${(f@)sessions}"
     do

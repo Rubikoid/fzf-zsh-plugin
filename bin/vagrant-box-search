@@ -2,7 +2,7 @@
 #
 # List all vagrant boxes available in the system including its status, and try to access the selected one via ssh
 #
-# From the fzf wiki - https://github.com/junegunn/fzf/wiki/examples
+# From the fzf-uni wiki - https://github.com/junegunn/fzf/wiki/examples
 
 
 set -o pipefail
@@ -29,7 +29,7 @@ function has() {
 vagrant-search(){
   #List all vagrant boxes available in the system including its status, and try to access the selected one via ssh
   # shellcheck disable=SC2164,SC2046,SC2002
-  cd $(cat "$machine_index" | jq '.machines[] | {name, vagrantfile_path, state}' | jq '.name + "," + .state  + "," + .vagrantfile_path'| sed 's/^"\(.*\)"$/\1/'| column -s, -t | sort -rk 2 | fzf | awk '{print $3}'); exec vagrant ssh
+  cd $(cat "$machine_index" | jq '.machines[] | {name, vagrantfile_path, state}' | jq '.name + "," + .state  + "," + .vagrantfile_path'| sed 's/^"\(.*\)"$/\1/'| column -s, -t | sort -rk 2 | fzf-uni | awk '{print $3}'); exec vagrant ssh
 }
 
 machine_index=~/.vagrant.d/data/machine-index/index

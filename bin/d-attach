@@ -2,7 +2,7 @@
 #
 # Select a docker container to start and attach to
 #
-# From fzf wiki: https://github.com/junegunn/fzf/wiki/examples
+# From fzf-uni wiki: https://github.com/junegunn/fzf/wiki/examples
 
 set -o pipefail
 if [[ -n "$DEBUG" ]]; then
@@ -27,7 +27,7 @@ function has() {
 
 function da() {
   local cid
-  cid=$(docker ps -a | sed 1d | fzf -1 -q "$1" | awk '{print $1}')
+  cid=$(docker ps -a | sed 1d | fzf-uni -1 -q "$1" | awk '{print $1}')
 
   [ -n "$cid" ] && docker start "$cid" && docker attach "$cid"
 }
