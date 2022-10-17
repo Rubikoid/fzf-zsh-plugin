@@ -11,17 +11,17 @@ fzf-uni-kill() {
   if [[ $(uname) = Linux ]]; then
     pid_col=2
     pids=$(
-      ps -f -u "$USER" | sed 1d | fzf-uni --multi | tr -s "[:blank:]" | cut -d' ' -f"$pid_col"
+      ps -f -u "$USER" | sed 1d | fzf-uni --multi -q "$1" | tr -s "[:blank:]" | cut -d' ' -f"$pid_col"
     )
   elif [[ $(uname) = Darwin ]]; then
     pid_col=3;
     pids=$(
-      ps -f -u "$USER" | sed 1d | fzf-uni --multi | tr -s "[:blank:]" | cut -d' ' -f"$pid_col"
+      ps -f -u "$USER" | sed 1d | fzf-uni --multi -q "$1" | tr -s "[:blank:]" | cut -d' ' -f"$pid_col"
     )
   elif [[ $(uname) = FreeBSD ]]; then
     pid_col=2
     pids=$(
-      ps -axu -U "$USER" | sed 1d | fzf-uni --multi | tr -s "[:blank:]" | cut -d' ' -f"$pid_col"
+      ps -axu -U "$USER" | sed 1d | fzf-uni --multi -q "$1"| tr -s "[:blank:]" | cut -d' ' -f"$pid_col"
     )
   else
     echo 'Error: unknown platform'
